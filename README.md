@@ -39,17 +39,17 @@ If you need to extend or restrict the file extensions list you can bind into the
 ```php
 public function changeAllowedFileExtensions(Varien_Event_Observer $observer)
 {
-  $file = $observer->getEvent()->getFile();
-  
-  // Add new '.mp4' file extension to the list
-  $allowedExtensions = $file->getData('allowed_extensions');
-  $allowedExtensions[] = 'mp4';
-  $file->setData('allowed_extensions', $allowedExtensions);
-  
-  // Or, ignore default list and only allow '.pdf' files
-  $file->setData('allowed_extensions', array('pdf'));
-  
-  return $this;
+    $file = $observer->getEvent()->getFile();
+    
+    // Add new '.mp4' file extension to the list
+    $allowedExtensions = $file->getData('allowed_extensions');
+    $allowedExtensions[] = 'mp4';
+    $file->setData('allowed_extensions', $allowedExtensions);
+    
+    // Or, ignore default list and only allow '.pdf' files
+    $file->setData('allowed_extensions', array('pdf'));
+    
+    return $this;
 }
 ```
 
@@ -58,15 +58,15 @@ You can also allow different file extensions per attribute like this:
 ```php
 public function changeAllowedFileExtensions(Varien_Event_Observer $observer)
 {
-  $file = $observer->getEvent()->getFile();
-  
-  // Assuming 'document' and 'sample_video' are your attribute codes
-  if ($file->getName() == 'document') {
-    $file->setData('allowed_extensions', array('pdf'));
-  } else if ($file->getName() == 'sample_video') {
-    $file->setData('allowed_extensions', array('mp4', 'mpeg', 'avi'));
-  }
-  
-  return $this;
+    $file = $observer->getEvent()->getFile();
+    
+    // Assuming 'document' and 'sample_video' are your attribute codes
+    if ($file->getName() == 'document') {
+        $file->setData('allowed_extensions', array('pdf'));
+    } else if ($file->getName() == 'sample_video') {
+        $file->setData('allowed_extensions', array('mp4', 'mpeg', 'avi'));
+    }
+    
+    return $this;
 }
 ```
