@@ -2,9 +2,9 @@
 /**
  * Product description block
  *
- * @category   Mage
- * @package    Mage_Catalog
- * @author     Magento Core Team <core@magentocommerce.com>
+ * @category Jvs
+ * @package  Jvs_FileAttribute
+ * @author   Javier Villanueva <javiervd@gmail.com>
  */
 class Jvs_FileAttribute_Block_Product_View_Attributes extends Mage_Catalog_Block_Product_View_Attributes
 {
@@ -32,8 +32,11 @@ class Jvs_FileAttribute_Block_Product_View_Attributes extends Mage_Catalog_Block
                     $value = Mage::app()->getStore()->convertPrice($value, true);
                 }
 
-                // If file attribute generate download link
-                if ($attribute->getFrontendInput() == 'jvs_file' && (string)$value != Mage::helper('catalog')->__('No')) {
+                // If 'file upload' input type generate download link
+                if ($attribute->getFrontendInput() == 'jvs_file'
+                    && (string)$value != Mage::helper('catalog')->__('No')
+                    && (string)$value != Mage::helper('catalog')->__('N/A')
+                ) {
                     $value = '<a href="' . $this->escapeUrl(Mage::getBaseUrl('media') . 'catalog/product' . $value) . '">';
                     $value .= Mage::helper('jvs_fileattribute')->__('Download');
                     $value .= '</a>';

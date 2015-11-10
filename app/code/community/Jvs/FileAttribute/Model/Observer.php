@@ -1,6 +1,18 @@
 <?php
+/**
+ * FileAttribute observer model
+ *
+ * @category Jvs
+ * @package  Jvs_FileAttribute
+ * @author   Javier Villanueva <javiervd@gmail.com>
+ */
 class Jvs_FileAttribute_Model_Observer
 {
+    /**
+     * Add file upload input type to attribute creation dropdown
+     *
+     * @param Varien_Event_Observer $observer
+     */
     public function addFileAttributeType(Varien_Event_Observer $observer)
     {
         $response = $observer->getEvent()->getResponse();
@@ -32,11 +44,18 @@ class Jvs_FileAttribute_Model_Observer
         return $this;
     }
 
+    /**
+     * Assign backend model to file upload input type
+     *
+     * @param  Varien_Event_Observer $observer
+     * @return Jvs_FileAttribute_Model_Observer
+     */
     public function assignBackendModelToAttribute(Varien_Event_Observer $observer)
     {
         $backendModel = 'jvs_fileattribute/attribute_backend_file';
         /** @var $object Mage_Eav_Model_Entity_Attribute_Abstract */
         $object = $observer->getEvent()->getAttribute();
+
         if ($object->getFrontendInput() == 'jvs_file') {
             $object->setBackendModel($backendModel);
             $object->setBackendType('varchar');
@@ -45,6 +64,12 @@ class Jvs_FileAttribute_Model_Observer
         return $this;
     }
 
+    /**
+     * Assign frontend model to file upload input type
+     *
+     * @param  Varien_Event_Observer $observer
+     * @return Jvs_FileAttribute_Model_Observer
+     */
     public function updateElementTypes(Varien_Event_Observer $observer)
     {
         $response = $observer->getEvent()->getResponse();

@@ -1,7 +1,21 @@
 <?php
+/**
+ * Backend model for file upload input type
+ *
+ * @category Jvs
+ * @package  Jvs_FileAttribute
+ * @author   Javier Villanueva <javiervd@gmail.com>
+ */
 class Jvs_FileAttribute_Model_Attribute_Backend_File
     extends Mage_Eav_Model_Entity_Attribute_Backend_Abstract
 {
+    /**
+     * After attribute is saved upload file to media
+     * folder and save it to its associated product.
+     *
+     * @param  Mage_Catalog_Model_Product $object
+     * @return Jvs_FileAttribute_Model_Attribute_Backend_File
+     */
     public function afterSave($object)
     {
         $value = $object->getData($this->getAttribute()->getName());
