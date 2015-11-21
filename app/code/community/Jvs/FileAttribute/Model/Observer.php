@@ -16,6 +16,7 @@ class Jvs_FileAttribute_Model_Observer
     public function addFileAttributeType(Varien_Event_Observer $observer)
     {
         $response = $observer->getEvent()->getResponse();
+
         $types = $response->getTypes();
         $types[] = array(
             'value' => 'jvs_file',
@@ -53,6 +54,7 @@ class Jvs_FileAttribute_Model_Observer
     public function assignBackendModelToAttribute(Varien_Event_Observer $observer)
     {
         $backendModel = 'jvs_fileattribute/attribute_backend_file';
+
         /** @var $object Mage_Eav_Model_Entity_Attribute_Abstract */
         $object = $observer->getEvent()->getAttribute();
 
@@ -60,6 +62,25 @@ class Jvs_FileAttribute_Model_Observer
             $object->setBackendModel($backendModel);
             $object->setBackendType('varchar');
         }
+
+        return $this;
+    }
+
+    /**
+     * Exclude 'jvs_file' attributes from standard form generation
+     *
+     * @param   Varien_Event_Observer $observer
+     * @return  Jvs_FileAttribute_Model_Observer
+     */
+    public function updateExcludedFieldList(Varien_Event_Observer $observer)
+    {
+        $block = $observer->getEvent()->getObject();
+        $list = $block->getFormExcludedFieldList();
+
+        $attributes = Mage::getModel('eav/entity_attribute')->getAttributeCodesByFrontendType('jvs_file');
+        $list = array_merge($list, array_values($attributes));
+
+        $block->setFormExcludedFieldList($list);
 
         return $this;
     }
@@ -73,9 +94,12 @@ class Jvs_FileAttribute_Model_Observer
     public function updateElementTypes(Varien_Event_Observer $observer)
     {
         $response = $observer->getEvent()->getResponse();
+
         $types = $response->getTypes();
         $types['jvs_file'] = Mage::getConfig()->getBlockClassName('jvs_fileattribute/element_file');
+
         $response->setTypes($types);
+
         return $this;
     }
 }

@@ -57,6 +57,14 @@
                     </jvs_fileattribute>
                 </observers>
             </adminhtml_catalog_product_edit_element_types>
+            <adminhtml_catalog_product_form_prepare_excluded_field_list>
+                <observers>
+                    <jvs_fileattribute>
+                        <class>jvs_fileattribute/observer</class>
+                        <method>updateExcludedFieldList</method>
+                    </jvs_fileattribute>
+                </observers>
+            </adminhtml_catalog_product_form_prepare_excluded_field_list>
         </events>
     </adminhtml>
     <default>
