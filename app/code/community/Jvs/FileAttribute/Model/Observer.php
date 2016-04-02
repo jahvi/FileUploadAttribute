@@ -102,4 +102,17 @@ class Jvs_FileAttribute_Model_Observer
 
         return $this;
     }
+
+    /**
+     * Change file attribute display output
+     *
+     * @param  Varien_Event_Observer $observer
+     * @return void
+     */
+    public function changeFileAttributeOutput(Varien_Event_Observer $observer)
+    {
+        $outputHelper = $observer->getHelper();
+        $helper = Mage::helper('jvs_fileattribute');
+        $outputHelper->addHandler('productAttribute', $helper);
+    }
 }

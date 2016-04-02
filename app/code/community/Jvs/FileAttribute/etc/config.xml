@@ -10,11 +10,6 @@
             <jvs_fileattribute>
                 <class>Jvs_FileAttribute_Block</class>
             </jvs_fileattribute>
-            <catalog>
-                <rewrite>
-                    <product_view_attributes>Jvs_FileAttribute_Block_Product_View_Attributes</product_view_attributes>
-                </rewrite>
-            </catalog>
         </blocks>
         <models>
             <jvs_fileattribute>
@@ -67,6 +62,19 @@
             </adminhtml_catalog_product_form_prepare_excluded_field_list>
         </events>
     </adminhtml>
+    <frontend>
+        <events>
+            <catalog_helper_output_construct>
+                <observers>
+                    <jvs_fileattribute>
+                        <type>singleton</type>
+                        <class>jvs_fileattribute/observer</class>
+                        <method>changeFileAttributeOutput</method>
+                    </jvs_fileattribute>
+                </observers>
+            </catalog_helper_output_construct>
+        </events>
+    </frontend>
     <default>
         <general>
             <validator_data>
