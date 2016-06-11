@@ -58,20 +58,7 @@ class Jvs_FileAttribute_Model_Attribute_Backend_File
             $uploader->setAllowRenameFiles(true);
             $uploader->setFilesDispersion(true);
 
-            // Make sure to unset the file extension from the main
-            // protected extension node to allow uploading
-            $store = Mage::app()->getStore();
-
-            $defaultConfig = Mage::getStoreConfig('general/file/protected_extensions', $store);
-
-            $filteredExtensions = array_diff($defaultConfig, $uploadedFile->getData('allowed_extensions'));
-
-            $store->setConfig('general/file/protected_extensions', $filteredExtensions);
-
             $uploader->save(Mage::getBaseDir('media') . '/catalog/product');
-
-            // Restore main protected extensions
-            $store->setConfig('general/file/protected_extensions', $defaultConfig);
         } catch (Exception $e) {
             return $this;
         }
