@@ -1,0 +1,7 @@
+{
+    "name": "jahvi/file-upload-attribute",
+    "description": "Add file upload attribute",
+    "type": "magento-module",
+    "license": "MIT",
+    "require": {}
+}
